@@ -16,6 +16,7 @@ Verified against Apple documentation, WWDC sessions (23/24/25), and shipping cod
 8. **Pinned/sticky headers ship with transparent backgrounds.** Always add `.background(.bar)` or a material.
 9. **Scroll-effect closures (`scrollTransition`, `visualEffect`) run on the render server.** Visual modifiers only, no state writes, no layout changes.
 10. **Exits are faster than entrances, nothing enters from scale(0), and every animation respects Reduce Motion** with a designed crossfade fallback.
+11. **Backwards compatibility is a design activity, not a guard clause.** Every entry below carries its OS floor and a fallback, and the fallback's job is to look CORRECT for that OS generation, not to approximate the newer look: on iOS 18 a glass capsule renders as `.ultraThinMaterial` + hairline (what Apple's own 18-era chrome looked like), `.glassProminent` falls back to `.borderedProminent`, the 26 scroll-edge frost falls back to a material-and-gradient soft edge, and 26-only behaviors (tab-bar minimize, ToolbarSpacer pods) no-op cleanly into the normal 18 bar. Route every gated API through one shared wrapper so the `#available` branch exists in exactly one place, and render-check BOTH branches on real devices — an app built this way looks native on 17, 18, and 26 simultaneously (Vero ships exactly this, floor 17.6). The reverse rule too: some pre-26 code is correct on 18 and harmful on 26 (bar tinting, hidden toolbar backgrounds) — gate it `#unavailable(iOS 26)`.
 
 ## Availability ladder (quick lookup)
 
