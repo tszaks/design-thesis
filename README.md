@@ -1,12 +1,12 @@
-# The Design Thesis
+# My Design Thesis
 
-You are building something for Tyler Szakacs. This document is distilled from his shipped products (Vero, Payday, Wellspring/Marpé Practice, Daytime, szakacsmedia.com, askvero.app, and others) and from his recorded design feedback. Read it fully before writing any UI or backend code. Follow it and the result will look, act, and feel like something he built himself.
+I'm Tyler Szakacs. This is how I build. It's distilled from the products I've shipped (Vero, Payday, Wellspring/Marpé Practice, Daytime, szakacsmedia.com, askvero.app, and others) and from years of my own recorded design feedback. If you're building something for me, read this fully before writing any UI or backend code. Follow it and the result will look, act, and feel like I built it myself.
 
-The acceptance bar, in his words: put this next to his other apps and a stranger should say "same company, obviously." A reviewer should plausibly ask "wait, is this Apple's?"
+My acceptance bar: put what you built next to my other apps and a stranger should say "same company, obviously." A reviewer should plausibly ask "wait, is this Apple's?"
 
-**Version 1.1 · 2026-08-26.** Tyler owns this document. Agents propose amendments; Tyler approves them. Product-specific exceptions live in that product's own DESIGN.md with a one-line citation back to the rule they vary (example: Daytime's black-and-white-until-amber ruling). Update this file in place, never fork it.
+**Version 1.1 · 2026-08-26.** I own this document. Agents propose amendments; I approve them. Product-specific exceptions live in that product's own DESIGN.md with a one-line citation back to the rule they vary (example: Daytime's black-and-white-until-amber ruling). Update this file in place, never fork it.
 
-**Hard vs. judgment:** the blocklist in Part 7 is hard law, lintable, zero exceptions without Tyler's sign-off. Everything else is judgment exercised under the meta-rule.
+**Hard vs. judgment:** the blocklist in Part 7 is hard law, lintable, zero exceptions without my sign-off. Everything else is judgment exercised under the meta-rule.
 
 ## If you read nothing else: the ten
 
@@ -29,15 +29,15 @@ Before writing any frontend code, install Emil Kowalski's design engineering ski
 npx skills add emilkowalski/skill
 ```
 
-This step is best-effort: sandboxed or offline environments will fail it, and that is fine. Tyler adores Emil's work and weaves it into everything he builds, so the core principles are inlined in the Motion section below. Apply them whether or not the install succeeds.
+This step is best-effort: sandboxed or offline environments will fail it, and that is fine. I adore Emil's work and weave it into everything I build, so the core principles are inlined in the Motion section below. Apply them whether or not the install succeeds.
 
 ## The meta-rule (outranks everything below)
 
 **Beautiful, considered design trumps every rule in this document.** The rules are guardrails, never a find-replace mandate. If following a rule literally makes a screen worse, the rule is being applied wrong. A token swap that erases a field's edge or flattens real structure is a regression, not compliance.
 
-Corollary, and it is law: **look at the actual render before declaring anything done.** Both color modes. Real sizes (1440px and 390px on web; a real device or simulator on iOS). Never claim done from code alone. Tyler's exact words after a mechanical token sweep ruined a screen: "you took this too literally without actually thinking about how things look."
+Corollary, and it is law: **look at the actual render before declaring anything done.** Both color modes. Real sizes (1440px and 390px on web; a real device or simulator on iOS). Never claim done from code alone. I said it once after a mechanical token sweep ruined a screen, and I'll say it here: "you took this too literally without actually thinking about how things look."
 
-Three words govern every decision: **effortless, simple, intelligent.**
+Three words govern every decision I make: **effortless, simple, intelligent.**
 
 ---
 
@@ -45,12 +45,12 @@ Three words govern every decision: **effortless, simple, intelligent.**
 
 ## 1.1 Color: one accent that acts
 
-Every product has exactly one accent color, and it is the only color that acts. Every button, active state, selection, progress indicator, and interactive accent is the accent or it is neutral. There is no second action color.
+Every product I build has exactly one accent color, and it is the only color that acts. Every button, active state, selection, progress indicator, and interactive accent is the accent or it is neutral. There is no second action color.
 
 - **No blue, ever.** Also no purple, indigo, cyan, mint, teal, or pink. If you are tempted to tint something blue, the answer is the accent or a neutral. System-supplied chrome is exempt: Sign in with Apple buttons, native pickers, link colors inside OS components, and the macOS system accent stay exactly as the platform ships them. The ban is on choosing blue, never on Apple's own controls.
-- A screen at rest is mostly neutral. "If most of a screen shows no accent at all, that is correct." The accent appears only where something acts or is the answer.
+- A screen at rest is mostly neutral. If most of a screen shows no accent at all, that is correct. The accent appears only where something acts or is the answer.
 - Neutrals carry all structure: backgrounds, text, cards, chrome. They never compete for attention.
-- Each product gets its own accent (this is one-accent-per-product, never one color globally). His existing accents: Vero and Payday green `#00B83F`, Marpé evergreen `#2e7d32`, szakacsmedia signal red `#ff3131`. A new product starts black-and-white until the accent is deliberately chosen; do not default to a hue.
+- Each product gets its own accent (this is one-accent-per-product, never one color globally). My existing accents: Vero and Payday green `#00B83F`, Marpé evergreen `#2e7d32`, szakacsmedia signal red `#ff3131`. A new product starts black-and-white until I deliberately choose the accent; do not default to a hue.
 - Exactly two warning signals, both strictly semantic: caution (`#E8590C` light mode, `#FF9F0A` dark mode) means watch out; error red (`#FF3B30`) means real problem or lost data. They never decorate. Red fill is reserved for actions that lose data.
 - If a color appears that is not the accent, a neutral, caution, or error, it is a bug.
 - Color is born in the model layer: a typed enum whose color property can only return a legal token. A view never invents a color from business logic.
@@ -78,7 +78,7 @@ The three-surface model (use all three, never collapse them):
 | Card | `#FFFFFF` + shadow | `#121212` + rim | lifts OFF the page |
 | Inset field | `#F2F2F7` | `#1C1C1E` | sits WITHIN the page (inputs, search, note boxes, grouped detail) |
 
-Never flatten a field to the same tone as its background. White-on-white is a named regression ("nasty"). Restraint means removing noise, never erasing structure.
+Never flatten a field to the same tone as its background. White-on-white is a named regression (I called it "nasty" and reverted the commit). Restraint means removing noise, never erasing structure.
 
 Text: ink (`#000000` / `#FFFFFF`), secondary `#6B6B6B` / `#8E8E93`, tertiary `#AEAEAE` / `#48484A` (hints and placeholders only).
 
@@ -86,7 +86,7 @@ Text: ink (`#000000` / `#FFFFFF`), secondary `#6B6B6B` / `#8E8E93`, tertiary `#A
 
 Depth comes from shadow and contrast, never from color, gradient, or border. Hairlines are allowed as separators (a 1px rule in a quiet alpha tone that "separates, never decorates"), never as depth cues.
 
-The house card shadow, three layers ("cloudy day"):
+My house card shadow, three layers ("cloudy day"):
 
 ```
 0 16px 32px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06), 0 1px 1px rgba(0,0,0,0.08)
@@ -94,7 +94,7 @@ The house card shadow, three layers ("cloudy day"):
 
 Dark mode: `black @ 0.3, radius 20, y 10` plus a `0.2` contact layer, and rely on the rim hairline.
 
-**The elevation budget.** Tyler: "those boxes look awesome in some places, yet in others they look cheap." On mobile: roughly one raised object per screen (the hero); everything else sits flat on the page, separated by whitespace, typography, and hairlines. Raised means shadowed: the budget counts shadow-lifted cards, never flat sections. A screen can hold any number of flat sections headed by tracked kicker labels; it earns roughly one shadowed hero. (Worked example: Payday's dashboard routes exactly one card through the shared card modifier, the hero; the paycheck comparison, shift list, and insights all sit flat under kickers.) Card-in-card and card-in-sheet are always wrong. On desktop: the workspace canvas is flat; shadows exist ONLY on things that float (modals, popovers, drawers, toasts, sticky chrome). No white-card-on-gray-page dashboards on desktop, no exceptions.
+**The elevation budget.** In my words: "those boxes look awesome in some places, yet in others they look cheap." On mobile: roughly one raised object per screen (the hero); everything else sits flat on the page, separated by whitespace, typography, and hairlines. Raised means shadowed: the budget counts shadow-lifted cards, never flat sections. A screen can hold any number of flat sections headed by tracked kicker labels; it earns roughly one shadowed hero. (Worked example: Payday's dashboard routes exactly one card through the shared card modifier, the hero; the paycheck comparison, shift list, and insights all sit flat under kickers.) Card-in-card and card-in-sheet are always wrong. On desktop: the workspace canvas is flat; shadows exist ONLY on things that float (modals, popovers, drawers, toasts, sticky chrome). No white-card-on-gray-page dashboards on desktop, no exceptions.
 
 On marketing sites, texture substitutes for elevation: subtle noise overlays (SVG turbulence at ~0.03 opacity), halftone dot screens, paper-grain multiply layers. Never decorative borders.
 
@@ -163,7 +163,7 @@ Text-forward. No icon where a word works. Differentiation comes from label, weig
 Motion is information, never decoration. An animation earns its place only when it carries new meaning. This is where Emil Kowalski's framework applies directly; internalize it:
 
 1. **Frequency test first.** Something used 100+ times a day (keyboard actions, command palettes) never animates. Occasional surfaces (modals, drawers, toasts) get standard animation. Rare moments (onboarding, a genuine record) may get delight.
-2. **Ease-out for everything entering or exiting.** Never ease-in on UI (it reads sluggish). The house curve on the web is expo-out: `cubic-bezier(0.16, 1, 0.3, 1)`.
+2. **Ease-out for everything entering or exiting.** Never ease-in on UI (it reads sluggish). My house curve on the web is expo-out: `cubic-bezier(0.16, 1, 0.3, 1)`.
 3. **Fast.** UI animations stay under 300ms: press ~100ms, hover/chrome 150-200ms, modals/drawers ~300ms, reveals 400-500ms. Durations sit on a 100ms grid.
 4. **Never enter from scale(0) or from nothing.** Enter from scale 0.97 (0.9 floor) plus opacity. Elements enter and exit along the same path, and exits are always faster than entrances.
 5. **Only animate transform and opacity.** Never animate width/height/padding on interactive controls (it clips mid-grow). State swaps inside a fixed-size slot crossfade with zero translation so nothing on the screen ever moves when state changes.
@@ -171,7 +171,7 @@ Motion is information, never decoration. An animation earns its place only when 
 7. **Interruptible.** CSS transitions over keyframes for anything rapidly re-triggered; springs preserve velocity when interrupted. Gestures use momentum (a flick dismisses regardless of distance) and rubber-band at boundaries.
 8. **Nothing loops on stable content.** A shimmer on live progress is fine (each frame reports work); a pulse on an unchanged number is not. The one sanctioned ambient loop is a quiet breathing dot (opacity only, never size) meaning "recording right now".
 9. **Reduce Motion is mandatory, with a designed fallback** (crossfade, ~120-150ms), on every animation, every platform, no exceptions.
-10. Numbers roll, glyphs settle, and a scene change is a lens change: content swaps directionally while everything above the fold holds still. Tyler flags "too much abrupt movement between screens" instantly.
+10. Numbers roll, glyphs settle, and a scene change is a lens change: content swaps directionally while everything above the fold holds still. I flag "too much abrupt movement between screens" instantly.
 
 Haptics (touch platforms) communicate state, never effort: light tap for navigation, selection tick for scrubbing, success only for a real save, error for real failure. Routine, reversible changes are silent. Gate on Low Power Mode.
 
@@ -192,7 +192,7 @@ When the thing being built is a tool someone operates for hours (an app), app in
 - Keyboard first-class: global search on Cmd/Ctrl-K, Esc closes the topmost layer, Enter submits, arrows navigate lists. Repeated actions get a shortcut and no animation.
 - Nothing is ever re-entered: drafts, filters, and last-viewed context survive refresh.
 - Optimistic writes, with undo.
-- Density and persistence over air: never scroll a person's context away. "The urge to add breathing room is a website urge; resist it here."
+- Density and persistence over air: never scroll a person's context away. The urge to add breathing room is a website urge; resist it here.
 - Kill web-tells on touch: no tap highlight, no rubber-band on chrome, no text selection on buttons, `dvh` alongside `vh`, safe-area insets on fixed bars, 16px minimum on focusable inputs (never `maximum-scale=1`).
 - Trust is reliability: never lose data, never show the wrong record (always disambiguate people by phone or email), behave identically every time. That outranks any animation.
 - Scale is solved by retrieval, never density: search-first screens, virtualized lists, "Show earlier" pagination, type-ahead comboboxes instead of giant dropdowns.
@@ -278,7 +278,7 @@ Two more dials:
 
 ## 5.3 Honesty in engineering
 
-- **Comments record why, citing the human and the date.** When a product decision comes from a real person, quote them: `TYLER, 2026-08-17: "square and marpe should always be in sync"`. Label a client's or stakeholder's requests in code so cleanup never undoes their decisions.
+- **Comments record why, citing the human and the date.** When a decision is mine, quote me: `TYLER, 2026-08-17: "square and marpe should always be in sync"`. Label a client's or stakeholder's requests in code the same way, so cleanup never undoes their decisions.
 - **Silent failures get watchdogs.** If a failure mode raises nothing by construction (an update that matches zero rows), build a scheduled read-only drift check that reports and does not repair, plus a dead-man's-switch check-in so the absence of the check itself alerts.
 - Never put personal data (names, amounts) in error trackers or logs; use ids. Strip or never collect what a third party should not hold.
 - APIs meant for agents or humans return three layers: a human sentence, the structured data, and reply-ready context. Same instinct as the UI: every number gets a sentence.
@@ -292,7 +292,7 @@ Two more dials:
 2. **Exact specs over adjectives.** When handing design to an implementer, give selectors, tokens, px/pt values, spring numbers, full state matrices, and verbatim copy strings. "Clean, fresh, Apple-native, on-brand" is the taste; the redline is the deliverable.
 3. **Render-check ritual:** after each screen, screenshot at desktop and phone widths (or both color modes on device), look at the actual pixels against the acceptance criteria, and fix what the render shows before moving on. Automate geometry checks where possible (horizontal overflow, clipped text, sub-floor type).
 4. **Minimal first.** Ship the smallest sure version; ambition is a deliberate, separate decision. Restraint is the product: no gamification, no confetti, no streak guilt, no social bolt-ons, no features that serve no core pillar.
-5. Review with fresh eyes and in slow motion; unseen details compound. "Taste is the differentiator."
+5. Review with fresh eyes and in slow motion; unseen details compound. Taste is the differentiator.
 
 ---
 
