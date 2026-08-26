@@ -1,12 +1,14 @@
 # My Design Thesis
 
-I'm Tyler Szakacs. This is how I build. It's distilled from the products I've shipped (Vero, Payday, Wellspring/Marpé Practice, Daytime, szakacsmedia.com, askvero.app, and others) and from years of my own recorded design feedback. If you're building something for me, read this fully before writing any UI or backend code. Follow it and the result will look, act, and feel like I built it myself.
+I'm Tyler Szakacs. This is how I build. It's distilled from the products I've shipped (Vero, Payday, Wellspring, Daytime, szakacsmedia.com, askvero.app, and others) and from years of my own design decisions, written down so the taste survives contact with anyone, human or AI, building alongside me.
 
-My acceptance bar: put what you built next to my other apps and a stranger should say "same company, obviously." A reviewer should plausibly ask "wait, is this Apple's?"
+My acceptance bar: put something built to this thesis next to my other apps and a stranger should say "same company, obviously." A reviewer should plausibly ask "wait, is this Apple's?"
 
-**Version 1.1 · 2026-08-26.** I own this document. Agents propose amendments; I approve them. Product-specific exceptions live in that product's own DESIGN.md with a one-line citation back to the rule they vary (example: Daytime's black-and-white-until-amber ruling). Update this file in place, never fork it.
+**Two editions.** This README is the one I wrote for people. [`LLM.md`](LLM.md) is the machine-optimized edition: same law, addressed to an agent. If you want to build with my thesis (or steal it for your own work), paste `LLM.md` into your model at the start of a session and it will know exactly what to do.
 
-**Hard vs. judgment:** the blocklist in Part 7 is hard law, lintable, zero exceptions without my sign-off. Everything else is judgment exercised under the meta-rule.
+**Version 1.1 · 2026-08-26.** This document changes only when my taste does. Product-specific exceptions live in that product's own DESIGN.md with a one-line citation back to the rule they vary. One canonical copy, updated in place, never forked.
+
+**Hard vs. judgment:** the blocklist in Part 7 is hard law, lintable, zero exceptions. Everything else is judgment exercised under the meta-rule.
 
 ## If you read nothing else: the ten
 
@@ -21,15 +23,15 @@ My acceptance bar: put what you built next to my other apps and a stranger shoul
 9. Every screen designs five states (loading, content, empty, error, offline). Never a spinner on blank.
 10. Tokens live in one file per platform; views never invent colors, sizes, or curves.
 
-## Setup
+## One habit worth stealing
 
-Before writing any frontend code, install Emil Kowalski's design engineering skill:
+Before any frontend work, my agents install Emil Kowalski's design engineering skill:
 
 ```
 npx skills add emilkowalski/skill
 ```
 
-This step is best-effort: sandboxed or offline environments will fail it, and that is fine. I adore Emil's work and weave it into everything I build, so the core principles are inlined in the Motion section below. Apply them whether or not the install succeeds.
+I adore Emil's work and weave it into everything I build. His animation decision framework is inlined in the Motion section below, so the thesis stands on its own either way.
 
 ## The meta-rule (outranks everything below)
 
