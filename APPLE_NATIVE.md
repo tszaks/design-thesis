@@ -837,4 +837,27 @@ A grep-based design lint in CI keeps all of this true: no raw glassEffect/materi
 
 ---
 
+# Sources
+
+Every entry was verified against at least one primary or established source at compile time (2026-08); nothing here is from model memory alone.
+
+**Primary (Apple):**
+- developer.apple.com/documentation — per-API pages (availability floors, signatures, doc text quoted in entries), including SwiftUI updates pages per release
+- Human Interface Guidelines (materials, glass, motion, feedback)
+- WWDC sessions: 23-10158 "Animate with springs", 23-10157 "Wind your way through advanced animations", 23-10159 "Beyond scroll views", 23-10258 (SF Symbols 5), 24-10145 "Enhance your UI animations and transitions", 24-10188 "What's new in SF Symbols 6", 24-10151 "Create custom visual effects", 24-10074 "Get started with Dynamic Type", 25-323 "Build a SwiftUI app with the new design"
+- Technote TN3154 (NavigationStack migration), Apple sample code (Destination Video, Landmarks)
+
+**Established community sources (recipes, gotchas, teardowns):**
+- Hacking with Swift (Paul Hudson) — incl. the iOS 18/26 API roundups and the canonical zoom-transition recipe
+- fatbobman.com — geometryGroup, containerRelativeFrame, TextRenderer, custom scroll-target deep dives
+- Donny Wals, Sarunw, Use Your Loaf, Swift with Majid, createwithswift.com, avanderlee.com, augmentedcode.io, mobilea11y.com, mehmetbaykar.com
+- Douglas Hill (zoom transitions), Kai Oelfke (TipKit pitfalls), Rudrank Riyam (Music lyric effects), mackuba.eu SwiftUI availability index, exploreswiftui.com, iOS-26-by-Examples
+- Open radar FB13447486 (pinned headers vs scrollTo), Stack Overflow threads cited inline where a gotcha is developer-reported
+
+**Shipping code:** Vero (`AskVero/ios`) and Payday production sources — every Part 13 pattern is real code, trimmed, with its original reasoning comments.
+
+Corrections encoded against common misinformation: spring presets are back-deployed to iOS 13 (Apple doc pages, not blog consensus); `.wiggle/.breathe/.rotate` are iOS 18 per the WWDC24 SF Symbols 6 transcript (several 2026 blogs misattribute them to 26); `scrollEdgeEffectHidden` is the shipping name (beta articles show `scrollEdgeEffectDisabled`).
+
+---
+
 *Companion documents in this repo: [README.md](README.md) (the design thesis, what should feel native and why) and [LLM.md](LLM.md) (the thesis in machine form). This catalog is the how. For iOS work, paste LLM.md and this file together.*
