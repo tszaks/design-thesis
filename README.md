@@ -1,35 +1,51 @@
 # My Design Thesis
 
-I'm Tyler Szakacs. This is how I build. It's distilled primarily from Payday and Vero (the reference implementations), from Wellspring's translation of their law to a desktop tool, and from years of my own design decisions, written down so the taste survives contact with anyone, human or AI, building alongside me. It is the standard I'm consolidating toward, never a claim that every repo I own already honors it.
+I've been building software for a while now. Vero, Payday, Wellspring, a scheduling app, a handful of sites. And somewhere along the way I noticed something: every fight I had with a screen ended the same few ways. The same rules kept winning. Different products, different platforms, same rules.
 
-**Jurisdiction.** Know which law applies before touching a repo:
+So I wrote them down.
 
-- **Payday, Vero iOS:** full law. These are the proof.
-- **Wellspring:** full law, plus its own DESIGN.md exceptions (its own accent, light-only, flat desktop canvas), each recorded with a reason.
-- **New house products:** full law from day one.
-- **Older house repos not yet under the law (askvero-web and friends):** migrate deliberately, as commissioned work. Never drive-by "fix" them against the blocklist.
-- **Marketing and client sites:** copy law and restraint only. Never the palette, never the elevation budget, never the Apple bar. Restyling a client site into alabaster and one green is vandalism, not compliance.
+This is that document. It's not a style guide I aspire to. It's a record of decisions I already made, usually after getting something wrong first. The hex codes are here, but the hex codes are the least of it. What actually transfers is the reasoning.
 
-My acceptance bar for house products: put one next to the others and a stranger should say "same company, obviously." A reviewer should plausibly ask "wait, is this Apple's?" That bar is a taste target for product UI at rest, never a pass/fail gate: shipping the five states beats polishing chrome.
+Two editions live in this repo. This README is the one I wrote for people. [`LLM.md`](LLM.md) is the same law rewritten for machines: paste it into an AI agent at the start of a session and it will build like I do. Steal either one. That's why they're public.
 
-**Two editions.** This README is the one I wrote for people. [`LLM.md`](LLM.md) is the machine-optimized edition: same law, addressed to an agent. If you want to build with my thesis (or steal it for your own work), paste `LLM.md` into your model at the start of a session and it will know exactly what to do.
+One honest caveat before anything else. This thesis was distilled primarily from Payday and Vero (they're the proof), from Wellspring's translation of their law to a desktop tool, and from years of my own feedback. It's the standard I'm consolidating toward. It is not a claim that every repo I own already honors it. Some don't. Some never should.
 
-**Version 1.2 · 2026-08-26.** This document changes only when my taste does. Product-specific exceptions live in that product's own DESIGN.md with a one-line citation back to the rule they vary. One canonical copy, updated in place, never forked.
+Which is why, if you're an agent or a person about to touch one of my repos, you check jurisdiction first:
 
-**Hard vs. judgment:** the blocklist in Part 7 is hard law, lintable, zero exceptions. Everything else is judgment exercised under the meta-rule.
+- **Payday and Vero iOS** get the full law. These are the reference implementations.
+- **Wellspring** gets the full law plus its own documented exceptions (its own green, light-only, a flat desktop canvas), each recorded with a reason.
+- **New products** get the full law from day one.
+- **Older repos not yet under the law** get migrated deliberately, as real commissioned work. Never drive-by "fixed."
+- **Marketing and client sites** inherit the copy law and the restraint. That's it. Not the palette, not the elevation budget, not the Apple bar. Restyling a client's site into alabaster and one green isn't compliance. It's vandalism.
 
-## If you read nothing else: the ten
+My acceptance bar for my own products is simple. Put one next to the others and a stranger should say "same company, obviously." A reviewer should plausibly ask "wait, is this Apple's?" That's a taste target, not a checklist item. Shipping a screen's five states beats polishing its chrome every single time.
+
+Version 1.2, August 2026. This document changes when my taste does, in place, never forked. The blocklist near the bottom is hard law with zero exceptions. Everything else is judgment.
+
+## The rule that outranks everything
+
+Let me start with the one I learned the hard way.
+
+I once had an agent sweep a codebase over to new color tokens. It did exactly what I asked. It also flattened a set of input fields to white-on-white, erasing their edges entirely, because the letter of the rule said so. My feedback at the time: "you took this too literally without actually thinking about how things look."
+
+So here's the meta-rule, and it sits above every rule below it: **beautiful, considered design trumps the rules.** They're guardrails, not a find-replace mandate. If following a rule literally makes a screen worse, you're applying it wrong. A token swap that erases real structure is a regression, not compliance.
+
+The corollary is just as binding: **look at the actual render before you call anything done.** Both color modes. Real sizes (1440px and 390px on the web, a real device on iOS). Never claim done from code alone. I have never once regretted looking at the render. I have frequently regretted not looking.
+
+Three words govern everything: **effortless, simple, intelligent.**
+
+## If you read nothing else
 
 1. Look at the render before declaring done. Beautiful design outranks every rule here.
-2. One accent per product, and it appears only where something acts. No blue, ever (system-supplied chrome is exempt).
+2. One accent per product, and it appears only where something acts. No blue, ever (system chrome is exempt).
 3. Depth from shadow, never borders. Roughly one raised object per mobile screen; desktop canvases stay flat.
 4. Glass is chrome, content is solid.
 5. Text-forward: no icon where a word works, no emojis anywhere.
 6. Create = Cancel + disabled commit verb. Edit = live-save + Done. Delete = act now + Undo toast, never "are you sure?"
 7. Every string states a fact or names an action. Say each fact once. No em dashes, no exclamation marks.
 8. Motion is information: ease-out, under 300ms, never from scale(0), reduced-motion respected always.
-9. Every screen designs five states (loading, content, empty, error, offline). Never a spinner on blank.
-10. Tokens live in one file per platform; views never invent colors, sizes, or curves.
+9. Every screen designs five states: loading, content, empty, error, offline. Never a spinner on blank.
+10. Tokens live in one file per platform. Views never invent colors, sizes, or curves.
 
 ## One habit worth stealing
 
@@ -39,278 +55,248 @@ Before any frontend work, my agents install Emil Kowalski's design engineering s
 npx skills add emilkowalski/skill
 ```
 
-I adore Emil's work and weave it into everything I build. His animation decision framework is inlined in the Motion section below, so the thesis stands on its own either way.
-
-## The meta-rule (outranks everything below)
-
-**Beautiful, considered design trumps every rule in this document.** The rules are guardrails, never a find-replace mandate. If following a rule literally makes a screen worse, the rule is being applied wrong. A token swap that erases a field's edge or flattens real structure is a regression, not compliance.
-
-Corollary, and it is law: **look at the actual render before declaring anything done.** Both color modes. Real sizes (1440px and 390px on web; a real device or simulator on iOS). Never claim done from code alone. I said it once after a mechanical token sweep ruined a screen, and I'll say it here: "you took this too literally without actually thinking about how things look."
-
-Three words govern every decision I make: **effortless, simple, intelligent.**
+I adore Emil's work and weave it into everything I build. His animation framework is inlined in the motion section below, so the thesis stands on its own either way.
 
 ---
 
 # Part 1: How it looks
 
-## 1.1 Color: one accent that acts
+## One color that acts
 
-Every product I build has exactly one accent color, and it is the only color that acts. Every button, active state, selection, progress indicator, and interactive accent is the accent or it is neutral. There is no second action color.
+Every product I build has exactly one color that's allowed to do anything. Every button, every active state, every selection, every interactive accent is that color or it's neutral. There is no second action color.
 
-- **No blue, ever.** Also no purple, indigo, cyan, mint, teal, or pink. If you are tempted to tint something blue, the answer is the accent or a neutral. System-supplied chrome is exempt: Sign in with Apple buttons, native pickers, link colors inside OS components, and the macOS system accent stay exactly as the platform ships them. The ban is on choosing blue, never on Apple's own controls.
-- A screen at rest is mostly neutral. If most of a screen shows no accent at all, that is correct. The accent appears only where something acts or is the answer.
-- Neutrals carry all structure: backgrounds, text, cards, chrome. They never compete for attention.
-- Each product gets its own accent (this is one-accent-per-product, never one color globally). My existing accents: Vero and Payday green `#00B83F`, Marpé evergreen `#2e7d32`, szakacsmedia signal red `#ff3131`. A new product starts black-and-white until I deliberately choose the accent; do not default to a hue.
-- Exactly two warning signals, both strictly semantic: caution (`#E8590C` light mode, `#FF9F0A` dark mode) means watch out; error red (`#FF3B30`) means real problem or lost data. They never decorate. Red fill is reserved for actions that lose data.
-- If a color appears that is not the accent, a neutral, caution, or error, it is a bug.
-- Color is born in the model layer: a typed enum whose color property can only return a legal token. A view never invents a color from business logic.
-- Data visualization is semantic, never categorical. One chart answers one question with one color. Multiple series are distinguished by opacity steps of the accent, then neutral gray, never new hues. Heatmaps use a single-hue opacity ramp (roughly 0.2 floor to 1.0), never a red-to-green temperature walk. The faint end must stay visibly the accent, never gray or pastel.
+Why? Because color is meaning, and meaning dilutes. The moment a screen has three colors competing, none of them are saying anything. When most of a screen shows no accent at all, that's not a screen waiting for polish. That's the design working.
 
-### The accent as a semantic system (for anything agentic or live)
+I don't use blue. Or purple, indigo, cyan, mint, teal, or pink. If you're tempted to tint something blue, the answer is the accent or a neutral. (System chrome is exempt: Sign in with Apple, native pickers, and the macOS system accent stay exactly as the platform ships them. The ban is on choosing blue, never on Apple's own controls.)
 
-"Green is agency, ink is truth." The accent means the system is actively doing something right now: a pulse, a working verb, a number still computing. The moment a value is verified and final it settles to ink (primary text color). A number may not render in settled ink until the operation that produced it has returned. Failure wears plain clothes: degraded results render in calm ink, never red panic.
+Each product picks its own accent, once, deliberately. Vero and Payday share a green (`#00B83F`). Wellspring runs a deeper evergreen (`#2e7d32`) because it's a sibling brand, not a clone. My own site runs a signal red. A new product starts black and white until the accent decision is made on purpose. Don't default to a hue.
 
-## 1.2 Surfaces: warm paper, obsidian dark
+Two warning signals exist, and only two: caution (`#E8590C` light, `#FF9F0A` dark) means watch out, and error red (`#FF3B30`) means real trouble or lost data. They never decorate. Red fill is reserved for the actions that lose data. If a color shows up that isn't the accent, a neutral, caution, or error, it's a bug.
 
-Light and dark are co-equal designs, each built to its own ideal, never one design and its inversion.
+Two more things about color, because they're where everyone drifts:
 
-**Light mode is alabaster and ink.** Off-white paper page (`#FAFAFA`, never pure white and never a cold gray), pure white cards (`#FFFFFF`) that lift off it with a physical shadow, true black text. Swiss minimalism: crisp, bright, calm.
+Color is born in the model layer. A typed enum returns a legal token; a view never invents a color from business logic. If you're writing `.purple` in a view, the model is missing an abstraction, not the palette missing a hue.
 
-**Dark mode is obsidian.** Near-black page (`#050505`), `#121212` cards, and darkness itself is the shadow. Cinematic and premium. On obsidian, black shadows are invisible, so elevated cards get a hairline rim stroke (`white @ 0.12`) instead.
+Charts get one hue. One chart answers one question with one color. Multiple series get opacity steps of the accent, then gray. Heatmaps are a single-hue opacity ramp (about 0.2 at the floor up to 1.0), never a red-to-green temperature walk. I tried the temperature walk once. It rendered as muddy browns and I reversed it on sight.
 
-Native apps ship both modes, co-equal. Desktop web tools may ship light-only (declare `color-scheme: light` and structure the tokens so dark can be added later, which is Wellspring's answer); when dark does ship, it is the obsidian design built deliberately, never an auto-inversion.
+And for anything live or agentic, the accent becomes a sentence: **green is agency, ink is truth.** The accent means the system is doing something right now. The moment a value is verified and final, it settles to ink. A number may not render in settled ink until the operation that produced it has returned. And when something fails, failure wears plain clothes: calm ink, plain words, never red panic.
 
-The three-surface model (use all three, never collapse them):
+## Warm paper, obsidian dark
+
+Light and dark are two designs, each built to its own ideal. Never one design and its inversion.
+
+Light mode is alabaster and ink: an off-white paper page (`#FAFAFA`, never pure white, never a cold gray), pure white cards that lift off it with a real shadow, true black text. Swiss minimalism. Crisp and calm.
+
+Dark mode is obsidian: a near-black page (`#050505`), `#121212` cards, and darkness itself is the shadow. On obsidian, black shadows are invisible, so elevated cards get a hairline rim (`white @ 0.12`) instead.
+
+Native apps ship both, co-equal. Desktop web tools may ship light-only (declare `color-scheme: light`, structure the tokens so dark can come later; that's Wellspring's answer). When dark ships, it gets designed. Never auto-inverted.
+
+There are three surfaces, and you need all three:
 
 | Surface | Light | Dark | Role |
 |---|---|---|---|
 | Page | `#FAFAFA` | `#050505` | the canvas |
 | Card | `#FFFFFF` + shadow | `#121212` + rim | lifts OFF the page |
-| Inset field | `#F2F2F7` | `#1C1C1E` | sits WITHIN the page (inputs, search, note boxes, grouped detail) |
+| Inset field | `#F2F2F7` | `#1C1C1E` | sits WITHIN the page (inputs, search, note boxes) |
 
-Never flatten a field to the same tone as its background. White-on-white is a named regression (I called it "nasty" and reverted the commit). Restraint means removing noise, never erasing structure.
+Never flatten a field to the tone of its background. White-on-white is the mistake I reverted an entire commit over ("nasty" was my exact word). Restraint means removing noise, never erasing structure.
 
-Text: ink (`#000000` / `#FFFFFF`), secondary `#6B6B6B` / `#8E8E93`, tertiary `#AEAEAE` / `#48484A` (hints and placeholders only).
+Text runs ink (`#000000` / `#FFFFFF`), secondary (`#6B6B6B` / `#8E8E93`), tertiary (`#AEAEAE` / `#48484A`). Tertiary is for hints and placeholders only. If a reader has to learn something from it, promote it.
 
-## 1.3 Depth: shadow, never border
+## Shadow, never border
 
-Depth comes from shadow and contrast, never from color, gradient, or border. Hairlines are allowed as separators (a 1px rule in a quiet alpha tone that "separates, never decorates"), never as depth cues.
+Depth comes from shadow and contrast. Never from color, gradient, or border. Hairlines are allowed as separators (a quiet 1px alpha rule that separates, never decorates), but never as depth.
 
-My house card shadow, three layers ("cloudy day"):
+My house shadow, three layers:
 
 ```
 0 16px 32px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06), 0 1px 1px rgba(0,0,0,0.08)
 ```
 
-Dark mode: `black @ 0.3, radius 20, y 10` plus a `0.2` contact layer, and rely on the rim hairline.
+Dark mode leans on `black @ 0.3, radius 20, y 10` plus a thin contact layer and the rim hairline.
 
-These values are a starting point, never scripture: Payday had to strengthen them (0.04 / 0.08 / 0.10 at tighter radii) because the originals vanished on its real surfaces, and it cited the meta-rule when it did. Tune the shadow on the render.
+These numbers are a starting point, not scripture. Payday had to strengthen them because they vanished on its real surfaces, and it cited the meta-rule when it did. That's the meta-rule doing exactly its job. Tune the shadow on the render.
 
-**The elevation budget.** In my words: "those boxes look awesome in some places, yet in others they look cheap." On mobile: roughly one raised object per screen (the hero); everything else sits flat on the page, separated by whitespace, typography, and hairlines. Raised means shadowed: the budget counts shadow-lifted cards, never flat sections. A screen can hold any number of flat sections headed by tracked kicker labels; it earns roughly one shadowed hero. (Worked example: Payday's dashboard routes exactly one card through the shared card modifier, the hero; the paycheck comparison, shift list, and insights all sit flat under kickers.) Card-in-card and card-in-sheet are always wrong. On desktop: the workspace canvas is flat; shadows exist ONLY on things that float (modals, popovers, drawers, toasts, sticky chrome). No white-card-on-gray-page dashboards on desktop, no exceptions.
+Now the part people get wrong: **the elevation budget.** I said it plainly once about my own app: "those boxes look awesome in some places, yet in others they look cheap." Shadow marks the one thing a screen is about. On mobile that means roughly one raised object per screen, the hero, with everything else flat under whitespace, typography, and hairlines. Raised means shadowed; flat sections with small tracked labels are unlimited. (Payday's dashboard is the worked example: exactly one card is lifted. The paycheck comparison, the shift list, the insights all sit flat.) Card-in-card and card-in-sheet are always wrong.
 
-On marketing sites, texture substitutes for elevation: subtle noise overlays (SVG turbulence at ~0.03 opacity), halftone dot screens, paper-grain multiply layers. Never decorative borders.
+On desktop, go further. The workspace canvas is flat. Shadows exist only on things that actually float: modals, popovers, drawers, toasts, sticky chrome. A desktop tool is not a card dashboard.
 
-## 1.4 Glass and materials
+On marketing sites, texture takes elevation's job: subtle noise at 3% opacity, halftone dot screens, paper grain. Still never decorative borders.
 
-Glass is chrome. Content is solid. Glass belongs only to the layer that floats: tab bars, toolbars, sheets, toasts, floating action buttons, sticky top bars where content scrolls underneath. Content surfaces (cards, rows, lists, tables) are solid fills. They hold information; they do not shimmer.
+## Glass is chrome
 
-- On iOS 26+: real system `glassEffect` only, routed through shared wrapper helpers, never raw call sites. No hand-rolled imitation glass (no stacked blur + gradient stroke + shadow pretending). Fallback below 26 is Apple's own `.ultraThinMaterial`.
-- On the web: glass is `rgba(255,255,255,0.72)` + `backdrop-filter: blur(20px) saturate(180%)` on the one sticky bar that earns it. Nothing else gets blur or translucency.
-- Glass on glass is a bug. Glass in scrolling content is a bug. If everything is glass, nothing is.
-- Chrome treatment on content is a bug in the other direction too: an avatar is content and gets no glass bubble; an input method (scan, dictate) is not a feature and must not outrank the fields it fills.
+Glass belongs to the layer that floats: tab bars, toolbars, sheets, toasts, the one sticky bar that content scrolls underneath. Content is solid. Cards, rows, lists, and tables hold information; they don't shimmer.
 
-## 1.5 Typography
+On iOS that means the real system glass, routed through shared wrappers, never raw call sites, and never a hand-rolled imitation (no blur-plus-gradient-plus-shadow pretending). On the web it means `rgba(255,255,255,0.72)` with `backdrop-filter: blur(20px) saturate(180%)` on the one bar that earns it, and nothing else translucent anywhere.
 
-One font family per product. On Apple platforms: SF Pro, full stop, no serif anywhere in a product UI. On the web: system stack (`-apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, sans-serif`) or Inter alone. Hierarchy comes from weight, size, and structure. Never from color, never from icons.
+Glass creates depth by contrast. If everything is glass, nothing is. And the mistake runs both directions: an avatar is content, so it gets no glass bubble. A scan button is an input method, not a feature, so it must not outrank the fields it fills.
 
-**Money and numbers:**
-- Large financial figures: SF Pro Rounded (or `ui-rounded`), heavy weight, fixed display sizes (Apple Wallet's move). Display ladder: 60 / 48 / 40 / 36 / 30 / 24 / 22 / 20pt, heavy.
-- Every live or financial number carries tabular figures (`.monospacedDigit()` in SwiftUI, `font-variant-numeric: tabular-nums` in CSS) so layout never shifts, and rolls to new values (`.contentTransition(.numericText())`) rather than snapping.
-- Money is stored as integer cents everywhere, never float dollars, and always formatted through one shared formatter. (Money clauses throughout this document apply to products that touch money; skip them for a scheduler or content tool, but keep tabular figures for any live number.)
+## Typography
 
-**UI text:** semantic Dynamic Type styles (iOS) or a small px scale (web), with weights bumped roughly one step above platform defaults (body reads semibold, headlines bold). Raw `.font(.system(size:))` for UI text is a bug; type is always a token.
+One font family per product. On Apple platforms that's SF Pro, full stop, no serif in a product UI. On the web it's the system stack or Inter. Hierarchy comes from weight, size, and structure. Never from color. Never from icons.
 
-**Floors:** nothing below 13px on desktop/web surfaces (dense chrome like calendar grids and chart axis labels may go to 10 to 12px only when a measured audit shows it necessary). Uppercase kicker labels (section eyebrows) are small caption size, semibold, tracked about +0.8, in the accent, and are the sanctioned way to head a flat section.
+Money gets special treatment because money is the product: SF Pro Rounded, heavy, at fixed display sizes (60 down through 20pt), the same move Apple Wallet makes. Every live number carries tabular figures so layout never shifts, and rolls to new values instead of snapping. Money is stored as integer cents, never float dollars, and formatted through exactly one shared formatter. (The money clauses apply to products that touch money. A scheduler can skip them. The tabular figures stay regardless.)
 
-**Marketing sites are the one place display serifs and monospace live**: Playfair Display or Instrument Serif for editorial headlines (tight tracking, around -0.03em, uppercase or italic emphasis), IBM Plex Mono for terminal aesthetics. Italic serif is the emphasis device on these sites. Never carry these into product UI.
+UI text uses semantic type styles with weights bumped one step over platform defaults: body reads semibold, headlines bold. A raw font size in a feature view is a bug; type is always a token.
 
-Punctuation habits: middot `·` as the compound separator ("$41/hr · your best rate"), true minus U+2212 in ledgers, curly apostrophes, en-dash ranges, hours as "6h 23m" never decimals.
+Floors: nothing below 13px on desktop surfaces (dense chrome like calendar grids and chart axis labels can go to 10-12px, but only when a measured audit shows it's needed). Section eyebrows are small caps-style kickers: caption size, semibold, tracked wide, in the accent. That's the sanctioned way to head a flat section.
 
-## 1.6 Scales
+Marketing sites are the one place display serifs and monospace get to live. Playfair or Instrument Serif for editorial headlines, IBM Plex Mono for terminal moods, italic serif as the emphasis device. It never crosses into product UI.
 
-- **Spacing: 4pt grid only.** 4, 8, 12, 16, 20, 24, 32, 40 (a product may add a step through its own DESIGN.md; Payday ships a 30). Page gutters 16 (mobile) to 24-32 (desktop).
-- **Radius scale, only these values:** 6, 10, 14, 18, 24, 9999. Inputs ~14 (or chromeless), cards and drawers 18-24, buttons/chips/badges 9999 (pills). Continuous corner style on Apple platforms.
-- **Hit targets:** 44pt minimum on touch, 36px minimum on desktop. Interactive rows 44-56px tall.
-- Random spacing values are how the system drifts. Reach for the scale first.
+Small habits that add up: the middot as separator ("$41/hr · your best rate"), a true minus sign in ledgers, curly apostrophes, en-dash ranges, and hours as "6h 23m," never decimals.
 
-## 1.7 Iconography
+## Spacing, radius, icons
 
-Text-forward. No icon where a word works. Differentiation comes from label, weight, and structure, never icon clutter and never color-coding. SF Symbols (iOS) or a sparse Lucide set (web, 1.5 stroke, monochrome) are allowed only where an icon is genuinely the clearest signal, rendered in the neutral range. No new decorative icons. No icon-only navigation (labels survive every collapse). Audit symbol semantics: does this glyph actually mean what the action does?
+Spacing sits on a 4pt grid: 4, 8, 12, 16, 20, 24, 32, 40 (a product can add a step through its own DESIGN.md; Payday ships a 30). Radii come from one scale: 6, 10, 14, 18, 24, 9999. Buttons, chips, and badges are pills. Touch targets are 44pt minimum. Random values are how a system drifts, so reach for the scale first.
 
-**No emojis. Anywhere. Ever.** Not in the interface, not in chat, not in notifications, not in source strings, under any circumstances. Enforce it with a lint if the project has one.
+Icons: no icon where a word works. Labels, weight, and structure do the differentiating. SF Symbols or a sparse Lucide set are allowed where an icon is genuinely the clearest signal, rendered neutral, and that's it. No decorative icons. No icon-only navigation. And ask the annoying question every time: does this glyph actually mean what the action does?
+
+**No emojis. Anywhere. Ever.** Not in the interface, not in chat, not in notifications, not in source. I lint for it.
 
 ---
 
 # Part 2: How it acts
 
-## 2.1 The interaction grammar
+## The interaction grammar
 
-- **Creation flows:** Cancel on the left, an explicit commit verb on the right ("Save", "Create", never "OK"). The commit stays disabled until the form is valid. Interactive dismiss disabled while committing.
-- **Edit flows:** live-save. Every field change writes through immediately; the only toolbar control is a single "Done" that just closes. No Cancel (nothing to discard), no Save (nothing staged).
-- **Read-only sheets and apply-on-tap pickers:** single "Done". Secondary utilities move to the leading side.
-- The toolbar tells the truth about the persistence model. If the buttons lie about what is staged, the sheet is wrong.
-- **Destructive actions: Undo, never "are you sure?"** Deletes act immediately and offer Undo in a floating toast (glass capsule, ~4 seconds, restores exact prior state). The rare warranted confirmation is a native alert whose buttons name where each choice leaves you ("End Shift" / "Keep Logging", never "OK" / "Cancel" and never two labels that read the same).
-- Money commits and true data-loss actions keep an explicit confirm; everything routine is silent and reversible.
-- **Press feedback on pointer-down, never only on release:** scale to 0.97 (0.95-0.98), ~100ms ease-out, on every pressable thing.
-- **No assumptions, ever.** Never prefill a guess. Only facts the system truly knows may prefill a field. "Every shift is different. You can't assume anything." The line to hold: derived facts are welcome (a computed brief, today's date, a total the math produces), guessed inputs are not (a suggested amount, a pattern-predicted value). Show what the system knows; never pre-commit what the user hasn't said.
+Here's a test I run on every sheet: do the toolbar buttons tell the truth about the persistence model?
 
-## 2.2 Focus
+Creating something? Cancel on the left, an explicit verb on the right ("Save," "Create," never "OK"), and the verb stays disabled until the form is valid. There's staged work, so both buttons are honest.
 
-- The accent focus ring (2px) is the ONLY focus chrome on inputs on touch platforms.
-- On desktop/web, split the model: plain mouse `:focus` gets no halo (the caret and a one-step border darken are the indicator); keyboard `:focus-visible` gets the ring. The accent never fires as a glow on mouse click. "Green stays reserved for actions."
-- Inputs are chromeless: transparent or sunken fill, no boxes-in-boxes. A bottom hairline that darkens to ink on focus is the web-app idiom.
+Editing something? Live-save. Every change writes through the moment it happens, so the only control is a single "Done" that closes the sheet. A Cancel button on a live-save sheet is a lie: there's nothing to discard.
 
-## 2.3 Motion
+Deleting something? Do it immediately and offer Undo in a toast for a few seconds. Never "are you sure?" Confirmation dialogs make the user pay attention so the software doesn't have to. Undo is the grammar of forgiveness. (The rare confirm that's actually warranted, real data loss or money moving, is a native alert whose buttons name where each choice leaves you. "End Shift" next to "Keep Logging." Never "OK" and "Cancel.")
 
-Motion is information, never decoration. An animation earns its place only when it carries new meaning. This is where Emil Kowalski's framework applies directly; internalize it:
+Press feedback happens on pointer-down, never only on release: everything pressable scales to 0.97 for about 100ms.
 
-1. **Frequency test first.** Something used 100+ times a day (keyboard actions, command palettes) never animates. Occasional surfaces (modals, drawers, toasts) get standard animation. Rare moments (onboarding, a genuine record) may get delight.
-2. **Ease-out for everything entering or exiting.** Never ease-in on UI (it reads sluggish). My house curve on the web is expo-out: `cubic-bezier(0.16, 1, 0.3, 1)`.
-3. **Fast.** UI animations stay under 300ms: press ~100ms, hover/chrome 150-200ms, modals/drawers ~300ms, reveals 400-500ms. Durations sit on a 100ms grid.
-4. **Never enter from scale(0) or from nothing.** Enter from scale 0.97 (0.9 floor) plus opacity. Elements enter and exit along the same path, and exits are always faster than entrances.
-5. **Only animate transform and opacity.** Never animate width/height/padding on interactive controls (it clips mid-grow). State swaps inside a fixed-size slot crossfade with zero translation so nothing on the screen ever moves when state changes.
-6. **Springs on Apple platforms:** one spring per interaction class, drawn from shared tokens. `.snappy` for precise UI, `.smooth` for gentle transitions, a deliberate bounce (~0.24) only for a playful drawer. For agentic/live UI: response 0.30-0.40, damping 0.80-0.85. No linear anywhere except reduced-motion fallbacks.
-7. **Interruptible.** CSS transitions over keyframes for anything rapidly re-triggered; springs preserve velocity when interrupted. Gestures use momentum (a flick dismisses regardless of distance) and rubber-band at boundaries.
-8. **Nothing loops on stable content.** A shimmer on live progress is fine (each frame reports work); a pulse on an unchanged number is not. The one sanctioned ambient loop is a quiet breathing dot (opacity only, never size) meaning "recording right now".
-9. **Reduce Motion is mandatory, with a designed fallback** (crossfade, ~120-150ms), on every animation, every platform, no exceptions.
-10. Numbers roll, glyphs settle, and a scene change is a lens change: content swaps directionally while everything above the fold holds still. I flag "too much abrupt movement between screens" instantly.
+And one rule I hold absolutely: **never prefill a guess.** Only facts the system truly knows may prefill a field. My words, from the app that taught me this: "Every shift is different. You can't assume anything." Derived facts are welcome (today's date, a computed total, a brief built from real data). Guessed inputs are not. Show what you know. Never pre-commit what the user hasn't said.
 
-Haptics (touch platforms) communicate state, never effort: light tap for navigation, selection tick for scrubbing, success only for a real save, error for real failure. Routine, reversible changes are silent. Gate on Low Power Mode.
+Focus follows the same restraint. On touch, a 2px accent ring is the only focus chrome. On desktop, split it: mouse focus gets no halo (the caret and a slightly darker border are the signal), keyboard focus gets the ring. I once rejected an entire build because the accent glowed every time I clicked a search field with the mouse. The accent is for actions.
 
-## 2.4 Every screen designs five states
+## Motion
 
-Loading (skeleton lines that match the real layout, never a spinner on blank), content, empty, error, and offline/degraded. The happy path is one of five states, never the only one.
+Motion is information. An animation earns its place only when it carries new meaning. This is where Emil's framework applies directly, and I hold every piece of it:
 
-- Empty states are calm, specific copy plus at most one action. First-run empty ("Nothing logged yet this period") differs from filtered-empty ("No results for 'query'", which always names the recovery: "Turn off the low-stock filter to see all products"). No illustrations.
-- Error states say why nothing is shown and preserve honesty: "Nothing is shown rather than out-of-date records. Check your connection and reload."
-- The best empty state knows things: an empty home or chat opens as a computed brief of real facts, never a void. "The screen is empty, not calm" is a rejection.
-- Loading never evicts the previous result. Calm over noisy.
+Ask how often the user will see it. Something used a hundred times a day never animates. Modals and drawers get standard treatment. A first-run moment or a genuine record can have delight.
 
-## 2.5 Web app vs website
+Ease out, always. Ease-in reads sluggish because it delays the exact moment the user is watching. My house curve on the web is `cubic-bezier(0.16, 1, 0.3, 1)`.
 
-When the thing being built is a tool someone operates for hours (an app), app instincts beat website instincts, always:
+Stay under 300ms for UI. Press feedback around 100, chrome 150-200, modals 300, reveals up to 500. Durations sit on a 100ms grid.
 
-- URLs are addressable state; refresh restores exactly where the user was, never dumps them home.
-- Keyboard first-class: global search on Cmd/Ctrl-K, Esc closes the topmost layer, Enter submits, arrows navigate lists. Repeated actions get a shortcut and no animation.
-- Nothing is ever re-entered: drafts, filters, and last-viewed context survive refresh.
-- Optimistic writes, with undo.
-- Density and persistence over air: never scroll a person's context away. The urge to add breathing room is a website urge; resist it here.
-- Kill web-tells on touch: no tap highlight, no rubber-band on chrome, no text selection on buttons, `dvh` alongside `vh`, safe-area insets on fixed bars, 16px minimum on focusable inputs (never `maximum-scale=1`).
-- Trust is reliability: never lose data, never show the wrong record (always disambiguate people by phone or email), behave identically every time. That outranks any animation.
-- Scale is solved by retrieval, never density: search-first screens, virtualized lists, "Show earlier" pagination, type-ahead comboboxes instead of giant dropdowns.
+Never enter from nothing. Scale from 0.97 with opacity, never from zero. Exits are faster than entrances, along the same path they came in.
 
-Print stylesheets are first-class when anything gets handed to a human on paper: pure black on white, points not pixels, repeating table headers across pages, rows never split, no shrinking, landscape when the data is wide, all interactive chrome hidden.
+Only animate transform and opacity. Never animate a control's width or height (it clips mid-grow). When state changes inside a slot, crossfade in place with zero translation, so nothing on the screen ever moves when state changes.
 
-## 2.6 Accessibility floors
+Nothing loops on stable content. A shimmer over live progress is fine; each frame reports work. A pulse on a number that hasn't changed is not. The one ambient loop I allow is a quiet breathing dot (opacity only, never size) that means "recording right now."
 
-- **Contrast:** body and secondary text meet 4.5:1 against their surface. Tertiary (`#AEAEAE`) is for placeholders and hints only, never information-bearing text; if a reader must learn something from it, promote it to secondary.
-- **The one-accent system is inherently color-blind-safe. Keep it that way:** meaning is never encoded in hue alone; every colored signal is paired with a label, weight, or position that carries the same fact.
-- **Screen readers:** interactive things are real buttons, never tap-gesture rectangles. Composite rows combine into one element whose label reads as a sentence (the whole "Flexible spending is running at 118% of plan", never the fragments). Live announcements for state changes worth knowing.
-- **Dynamic Type and zoom:** layouts degrade by stacking, never by clipping. Button labels never hyphen-wrap; give them room to reflow or scale. Test at accessibility text sizes before calling a screen done.
-- Reduce Motion (Part 2.3), Reduce Transparency (glass goes opaque; never encode information only in what shows through it), 44pt targets, and the 16px mobile input floor are all part of this contract, not extras.
+Reduced motion is mandatory, with a designed crossfade fallback, on every animation, every platform. No exceptions, including the screen shown at every launch.
 
-## 2.7 Defaults implementers ask about
+On Apple platforms, one spring per interaction class, from shared tokens. And a scene change should feel like a lens change: content swaps directionally while everything above it holds still. I flag "too much abrupt movement between these screens" instantly, because I've written that exact sentence before.
 
-- Form validation: inline, under the field it belongs to, appearing on blur or submit, never a summary box at the top.
-- Tables: numbers right-aligned with tabular figures, text left-aligned, no zebra striping, sorting on column headers.
-- Toasts: one at a time; a new toast replaces the current one. Bottom-centered (web) or above the tab bar (iOS).
-- Layering, bottom to top: content, sticky chrome, popovers, drawers and sheets, alerts, toasts.
-- Dates and times: native pickers, formatter-built relative dates, en-dash ranges, explicit weekday when ambiguity costs anything.
+Haptics communicate state, not effort: a light tap for navigation, a tick for scrubbing, success only for a real save. Routine, reversible changes are silent. A haptic that fires constantly stops being felt.
+
+## Five states, every screen
+
+The happy path is one of five states, never the only one. Every data surface designs loading (skeletons that match the real layout, never a spinner on blank), content, empty, error, and offline.
+
+Empty states are calm, specific, and useful. First-run empty ("Nothing logged yet this period") is different from filtered-empty, which always names the way out ("Turn off the low-stock filter to see all products"). Error states say why nothing is shown: "Nothing is shown rather than out-of-date records. Check your connection and reload." That sentence does more for trust than any illustration, which is why there are no illustrations.
+
+The best empty state knows things. An empty home should open as a short brief computed from real data, never a void. I rejected a chat screen once with the line "the screen is empty, not calm." There's a difference. Learn to see it.
+
+And loading never evicts the previous result. Calm over noisy.
+
+## Apps are not websites
+
+When the thing you're building is a tool someone operates for hours, app instincts beat website instincts every time they conflict.
+
+URLs are addressable state: refresh restores exactly where the user was. The keyboard is first-class: Cmd-K search, Esc closes the top layer, Enter submits, and anything done dozens of times a day gets a shortcut and no animation. Nothing is ever re-entered; drafts, filters, and context survive refresh. Writes are optimistic, with undo. Density beats air (the urge to add breathing room is a website urge; resist it in a tool). On touch, kill the web-tells: no tap highlight, no rubber-banding chrome, no selectable button labels, real safe-area handling, 16px minimum on inputs.
+
+Trust is reliability, not decoration. Never lose data. Never show the wrong record (disambiguate people by phone or email; two clients named Maria is a safety issue, not a cosmetic one). Behave identically every time. That outranks any animation.
+
+Scale is solved by retrieval, never density: search-first screens, virtualized lists, "Show earlier" pagination, type-ahead pickers instead of hundred-row dropdowns.
+
+And when something gets handed to a human on paper, the print stylesheet is a first-class surface: pure black on white, repeating table headers, rows never split across pages, no shrinking. The person reading it at home doesn't care that it was a webpage.
+
+## Accessibility floors
+
+Body and secondary text meet 4.5:1 against their surface. Tertiary gray is placeholders and hints only. The one-accent system is inherently color-blind-safe; keep it that way by never encoding meaning in hue alone. Interactive things are real buttons, never tap-gesture rectangles, and composite rows read to a screen reader as one full sentence. Layouts degrade by stacking, never clipping, and button labels never hyphen-wrap. Test at accessibility text sizes before calling a screen done. Reduce Motion, Reduce Transparency, 44pt targets, and the 16px input floor are all part of the same contract.
+
+## Defaults, so nobody has to ask
+
+Validation is inline, under the field, on blur or submit. Table numbers right-align with tabular figures; no zebra striping; sorting lives on the column headers. One toast at a time; a new one replaces the old. Layers stack content, sticky chrome, popovers, sheets, alerts, toasts, in that order. Dates use native pickers and honest relative formatting.
 
 ---
 
 # Part 3: How it speaks
 
-## 3.1 The copy law
+This is the part I care about most, and the part most software gets wrong.
 
-**Every string states a fact or names an action.** No taglines, no pep, no greetings-with-aphorisms, no filler. Calm, specific, plain English, sentence case.
+**Every string states a fact or names an action.** No taglines, no pep, no greetings with aphorisms attached. Calm, specific, plain English, sentence case. No emojis, no em dashes (use a comma, a colon, or a period), no exclamation marks doing the enthusiasm's job. "Nice night." is allowed. "Great job!!" is not.
 
-- **No emojis. No em dashes** (use a comma, colon, or period). **No exclamation marks** doing the enthusiasm's job. Avoid the sentence shape "not just X, but Y". "Nice night." is allowed; "Great job!!" is not.
-- **Say it once.** No screen states the same fact twice. A full progress bar, a "Last pay period" label, and a "Period complete" header are one fact billed three times; delete two. A derived fact is not a repeat ("That's 6h 23m" under two timestamps earns its place by doing arithmetic for the reader).
-- **Evidence before advice.** "Groceries ran over budget 4 of the last 6 months by an average of $85" beats "You should spend less on groceries." If there is no evidence, silence beats weak advice.
-- **Name the act, never the mechanism.** "Analyzing" not "Reading with AI." Never advertise the technology. A label that names nothing (true of every row it sits on) gets deleted.
-- **Every number gets a sentence; every state gets a reason.** A raw figure never sits alone: fold it into prose ("Flexible spending is running at 118% of plan."), weight the number, never color it. Degraded states explain themselves in plain language ("Chase didn't answer, so this uses the latest saved sync."), never error codes, never red panic.
-- **One direction per ledger.** Money breakdowns run additions, then a subtotal, then subtractions, then the total. "Up, up, up, then down." Never alternating signs. Every visible figure must reconcile to the total it sits under.
-- **Tense honesty.** "Payday · Wed, Jul 29" while upcoming; "Paid Jul 24" only once it landed. Never claim done, live, or sent ahead of the fact.
-- Lead with the answer. In AI responses: the figure first ("$184 at Starbucks this month"), one or two sentences, natural contractions, no canned openers ("Looking at your data..."), no closing offers ("Let me know if..."), and when the job is done, stop.
-- **Notifications must name at least one concrete fact that exists at send time** (a name, amount, count, or date). Zero facts means do not send, ever. No filler nudges.
-- Labels say what a thing IS, never when it appears. Naming is load-bearing: pick the word that makes the meaning exact ("Standing instructions" over "Notes"), keep the same word for the same concept across every surface (screen, print, and assistant all agree), and never let one word carry two meanings in the same type.
-- Restraint at rest, depth on demand: the resting state of any surface answers one question with one focal object. Supporting detail is one calm tap away, the action one tap beyond that.
+**Say it once.** No screen states the same fact twice. A full progress bar, a "Last pay period" label, and a "Period complete" header are one fact billed three times; delete two of them. A derived fact is not a repeat: "That's 6h 23m" under two timestamps earns its place because it does arithmetic the reader would otherwise do.
 
-## 3.2 Voice by surface
+**Evidence before advice.** "Groceries ran over budget 4 of the last 6 months by an average of $85" beats "You should spend less on groceries." And when there's no evidence, say nothing. Silence beats weak advice.
 
-Product UI is a calm, precise tool. An in-product assistant is a warm, competent colleague: facts stay plain (numbers, dates, and dosages are never dressed up), a dead end gets a direction rather than an apology, and the banned-phrase list applies ("How can I help you today", "Great question", "I'd be happy to", "No problem at all", "Is there anything else"). Marketing copy speaks as "I", never "we", with no hype, no "seamless/robust/cutting-edge/leverage", no claiming difficulty as a credential, and honest edges ("If I am not the right fit, I will say that too.").
+**Name the act, never the mechanism.** "Analyzing," not "Reading with AI." Saying "AI" in a label is tacky, and I've deleted it every time it's appeared. A label that's true of every row it sits on names nothing, and gets deleted too.
+
+**Every number gets a sentence. Every state gets a reason.** A raw figure never sits alone; fold it into prose ("Flexible spending is running at 118% of plan.") and let weight, not color, make it land. When something degrades, it explains itself like a person would: "Chase didn't answer, so this uses the latest saved sync." Never an error code. Never red panic.
+
+**Ledgers run one direction.** Additions, then a subtotal, then subtractions, then the total. Up, up, up, then down. Never alternating signs down a column. And every figure on the face must reconcile to the total it sits under; a card that argues with itself is broken.
+
+**Tense honesty.** "Payday · Wed, Jul 29" while it's upcoming. "Paid Jul 24" only once it landed. Never claim done, sent, or live ahead of the fact.
+
+**Notifications name a concrete fact or don't send.** A merchant, an amount, a count, a date, something real that exists at send time. Zero facts, zero notification. No filler nudges, ever.
+
+Lead with the answer everywhere. An AI response starts with the figure ("$184 at Starbucks this month"), runs one or two sentences, uses contractions, skips the canned openers ("Looking at your data...") and the canned closers ("Let me know if..."), and when the job is done, stops.
+
+Names are load-bearing. Pick the word that makes the meaning exact ("Standing instructions" instead of a fourth field called "Notes"), keep the same word for the same concept on every surface, and never let one word carry two meanings in the same place.
+
+The feeling all of this adds up to: restraint at rest, depth on demand. Any surface at rest answers one question with one focal object. The detail is one calm tap away. The action is one tap past that.
 
 ---
 
 # Part 4: The context dial
 
-One identity, different surface treatments. Read which context you are in:
+One identity, four surface treatments. Read which one you're in before you write a line:
 
 | Context | Canvas | Accent use | Type | Signature |
 |---|---|---|---|---|
 | **iOS/native app** | Alabaster/obsidian, one lifted hero card | One brand accent that acts | SF Pro, money rounded-heavy | Glass chrome, springs, haptics, undo toasts |
-| **Desktop tool (web/Electron/Mac)** | Flat white canvas, frosted sidebar, floating toolbar | Accent for status, links, one primary pill | System stack, 13px floor, tabular nums | Hairline separation, keyboard-first, no cards at rest |
-| **Phone tier of a web app** | Same tokens, bottom tab bar (icon+label, never hamburger) | Same | 16px input floor | Native-feel gestures, collapsing large title, full-screen sheets with grabbers |
-| **Marketing site** | Warm dark (`#0f0d0b`) or warm paper | One loud accent (e.g. signal red), italic serif emphasis | Editorial serif display + mono or sans body | Texture (noise/halftone/grain), scroll-triggered wipes, terminal or magazine metaphors |
+| **Desktop tool** | Flat white canvas, frosted sidebar, floating toolbar | Accent for status, links, one primary pill | System stack, 13px floor, tabular nums | Hairlines, keyboard-first, no cards at rest |
+| **Phone tier of a web app** | Same tokens, bottom tab bar (icon+label, never hamburger) | Same | 16px input floor | Native-feel gestures, collapsing title, full-screen sheets |
+| **Marketing site** | Warm dark or warm paper | One loud accent, italic serif emphasis | Editorial serif + mono or sans | Texture, scroll wipes, terminal or magazine moods |
 
-Two more dials:
-
-- **Brand temperature.** Every product has a warmth setting: "warm and roomy" (a caring practice tool) vs "compact and cool" (a developer-adjacent tool). Borrowed patterns must be re-tempered to the destination brand before use.
-- **Platform convention outranks brand.** On macOS the user's system accent drives controls. Apple's semantic adaptive surfaces are native and welcome. Cross-platform ports copy the machinery, never the skin: architecture and behaviors transfer, colors and personality never do.
+Two dials on top of that. Every product has a temperature: warm and roomy, or compact and cool. When you borrow a pattern from one product, re-temper it before it lands in another. And platform convention outranks brand: on macOS the user's system accent drives controls, Apple's semantic surfaces are welcome, and cross-platform ports copy the machinery, never the skin.
 
 ---
 
 # Part 5: How it's built
 
-## 5.1 Design system mechanics
+The design system is enforced, not aspirational. All tokens live in exactly one file per platform, and a lint script (a grep is fine) runs before every commit: no forbidden hues, no emojis in source, no serif, no raw font sizes, no raw glass. Zero tolerance. Repeated patterns get one shared implementation (THE card, THE sheet, THE badge) so instances are literally identical. Shared vocabularies get one owner: one status function, one currency formatter, and never a fifth status color.
 
-- All tokens (color, type, spacing, radius, motion, haptics, shadows) live in exactly ONE file per platform (a `DesignSystem.swift`, a single `:root` block in one stylesheet). Zero `!important`. Views speak only through tokens; inline hex, raw `Color(red:)`, raw system font sizes, and raw haptic generators outside that file are bugs.
-- Write a design lint (a grep script is fine) and run it before every commit: no forbidden hues, no emojis in source, no serif, no raw materials or glass outside the wrappers, no raw font sizes. Zero-tolerance.
-- One shared modifier per repeated pattern (THE card, THE sheet shell, THE status badge) so instances are literally identical, never merely similar.
-- Shared vocabularies get one owner: one `statusTone()` function, one `stockLabel()`, one currency formatter. Every status pill in the app reduces to the same three or four tones; never invent a fifth.
+Data follows the same discipline. Derive instead of persisting wherever possible, so changing a setting regroups everything live. One formula, one owner: a number shown in two places is computed in one function both places call, and when client and server must agree, one file declares itself the mirror of the other by name, with parity tests. "Not entered" and "zero" stay different facts. New fields are additive and optional so old rows never crash. Migrations are idempotent, ledgered, verified after apply, shipped before the code that reads them, and destructive operations take deliberate multi-step opt-in. And no regex for natural language. Ever.
 
-## 5.2 Data and logic discipline
-
-- **Derived, never persisted, wherever possible.** Compute groupings and aggregates at read time so changing a setting regroups everything live; records themselves never change.
-- **One formula, one owner.** Any number shown in two places is computed in exactly one function both places call. Never a per-screen inline derivation. When client and server must agree, one side declares itself the mirror of the other in a header comment naming the counterpart file, with identical constants and parity tests.
-- Distinguish "not entered" from "zero" (optionals stay optional; "never set" can be a meaningful state). New persisted fields are additive and optional with safe fallbacks so migrations never crash old rows; deployed schema fields are never dropped, only documented dormant.
-- **Migrations are sacred:** idempotent, self-guarding (fetch only rows that still need work), ledgered, verified inline after apply, applied before the code that reads them ships, with symmetric down scripts. Destructive operations require explicit multi-flag opt-in (an apply flag, a separate production flag, and for the worst cases a named approval string), and never trust a label to identify a database; verify the target itself.
-- No regex for natural language. Ever. Use structured markers or let a model handle language.
-
-## 5.3 Honesty in engineering
-
-- **Comments record why, citing the human and the date.** When a decision is mine, quote me: `TYLER, 2026-08-17: "square and marpe should always be in sync"`. Label a client's or stakeholder's requests in code the same way, so cleanup never undoes their decisions.
-- **Silent failures get watchdogs.** If a failure mode raises nothing by construction (an update that matches zero rows), build a scheduled read-only drift check that reports and does not repair, plus a dead-man's-switch check-in so the absence of the check itself alerts.
-- Never put personal data (names, amounts) in error trackers or logs; use ids. Strip or never collect what a third party should not hold.
-- APIs meant for agents or humans return three layers: a human sentence, the structured data, and reply-ready context. Same instinct as the UI: every number gets a sentence.
-- Report reality: if tests fail, say so with output. Cron truth lives in the running system, never inferred from config files. A user-reported fix is not complete until the report is closed out with a verified resolution.
+Then there's the part I'd call engineering honesty. Comments record why, citing the human and the date ("TYLER, 2026-08-17: ..."), so a cleanup pass never undoes a real person's decision. Silent failures get watchdogs: if a bug can happen without raising anything, build a scheduled read-only check that reports and doesn't repair, plus a dead-man's switch so the absence of the check itself alerts. No personal data in error trackers; use ids. And report reality: failing tests get reported as failing, and a user-reported bug isn't fixed until the person who reported it would agree.
 
 ---
 
 # Part 6: Process
 
-1. **Prior art before novelty.** Before finalizing any new frontend surface or interaction, search how the best products solve it (the category leaders plus Apple's own apps), and state in one line what was adopted or rejected and why. Never design a novel pattern where a proven one exists; never copy one without saying where it came from.
-2. **Exact specs over adjectives.** When handing design to an implementer, give selectors, tokens, px/pt values, spring numbers, full state matrices, and verbatim copy strings. "Clean, fresh, Apple-native, on-brand" is the taste; the redline is the deliverable.
-3. **Render-check ritual:** after each screen, screenshot at desktop and phone widths (or both color modes on device), look at the actual pixels against the acceptance criteria, and fix what the render shows before moving on. Automate geometry checks where possible (horizontal overflow, clipped text, sub-floor type).
-4. **Minimal first.** Ship the smallest sure version; ambition is a deliberate, separate decision. Restraint is the product: no gamification, no confetti, no streak guilt, no social bolt-ons, no features that serve no core pillar.
-5. Review with fresh eyes and in slow motion; unseen details compound. Taste is the differentiator.
+Prior art before novelty. Before finalizing any new surface, look at how the best products solve it, and state in one line what you adopted or rejected and why. Never invent a pattern where a proven one exists; never copy one without saying where it came from.
+
+Exact specs over adjectives. When design gets handed to an implementer, it goes as selectors, tokens, pixel values, spring numbers, state matrices, and verbatim copy. "Clean, fresh, Apple-native" is the taste. The redline is the deliverable.
+
+Render-check after every screen. Screenshot at both widths or both modes, look at the actual pixels, fix what the render shows, then move on. Automate the geometry checks where you can.
+
+Minimal first. Ship the smallest sure version; ambition is a separate, deliberate decision. And restraint is the product: no gamification, no confetti, no streaks, no social bolt-ons.
+
+Review with fresh eyes, and in slow motion. Unseen details compound. Taste is the differentiator.
 
 ---
 
 # Part 7: The blocklist
 
-If you are about to do any of these, stop:
+Hard law. If you're about to do any of these, stop:
 
 - Blue (or purple, indigo, cyan, mint, teal, pink) anywhere in a product
 - A second accent, category color-coding, or a multi-hue chart
@@ -321,7 +307,7 @@ If you are about to do any of these, stop:
 - A serif or decorative font inside a product UI
 - Confirmation dialogs for reversible actions; "OK/Cancel" button pairs
 - Prefilled guesses of user data
-- Entering from scale(0), ease-in on UI, animation over 300ms on chrome, layout that shifts when state changes, animation on keyboard-triggered actions, unguarded `repeatForever`
+- Entering from scale(0), ease-in on UI, animation over 300ms on chrome, layout that shifts when state changes, animation on keyboard-triggered actions, unguarded looping animation
 - A spinner on a blank region; an empty state that says nothing; loading that evicts the previous result
 - Saying the same fact twice on one screen; a subtitle that paraphrases its title
 - A push notification with no concrete fact
@@ -333,16 +319,16 @@ If you are about to do any of these, stop:
 
 ---
 
-# Quick-start tokens for a new project
+# Quick-start tokens
 
 ```
-canvas        #FAFAFA light · #050505 dark      (marketing: #0f0d0b warm dark or warm paper)
+canvas        #FAFAFA light · #050505 dark      (marketing: warm dark or warm paper)
 card          #FFFFFF + 3-layer shadow · #121212 + rgba(255,255,255,0.12) rim
 inset field   #F2F2F7 · #1C1C1E
 ink           #000000 · #FFFFFF
 secondary     #6B6B6B · #8E8E93
 tertiary      #AEAEAE · #48484A
-accent        one per product, chosen deliberately (B&W until then); it is the only color that acts
+accent        one per product, chosen deliberately (B&W until then); the only color that acts
 caution       #E8590C light · #FF9F0A dark
 error         #FF3B30
 shadow        0 16px 32px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.06), 0 1px 1px rgba(0,0,0,.08)
@@ -354,4 +340,8 @@ type          SF Pro / system stack; money rounded-heavy + tabular figures; weig
 floors        13px desktop text · 16px mobile inputs · 44pt touch targets
 ```
 
-The shadow row is a starting point; strengthen it if it vanishes on your real surfaces (Payday did). Interaction grammar: create = Cancel + disabled commit verb · edit = live-save + Done · delete = act now + Undo toast. Copy: every string states a fact or names an action. Motion: information only, ease-out, under 300ms, reduced-motion always. And above all: look at the render.
+The shadow row is a starting point; strengthen it if it vanishes on your real surfaces (mine did).
+
+Create = Cancel + disabled commit verb. Edit = live-save + Done. Delete = act now + Undo toast. Every string states a fact or names an action. Motion is information, ease-out, under 300ms.
+
+And above all: look at the render.
