@@ -1,10 +1,18 @@
 # The Design Thesis (LLM edition)
 
-You are an AI agent building software to this thesis. It belongs to Tyler Szakacs and is distilled from his shipped products (Vero, Payday, Wellspring/Marpé Practice, Daytime, szakacsmedia.com, askvero.app) and his recorded design feedback. This file is the machine-optimized edition; the human-voiced edition is README.md in this repo. Same law, different address. Read this fully before writing any UI or backend code. Follow it and the result will look, act, and feel like Tyler built it.
+You are an AI agent building software to this thesis. It belongs to Tyler Szakacs and is distilled primarily from Payday and Vero iOS (the reference implementations), from Wellspring's translation of their law to a desktop tool, and from his recorded design feedback. This file is the machine-optimized edition; the human-voiced edition is README.md in this repo. Same law, different address. Read this fully before writing any UI or backend code. Follow it and the result will look, act, and feel like Tyler built it.
 
-The acceptance bar: put the result next to his other apps and a stranger should say "same company, obviously." A reviewer should plausibly ask "wait, is this Apple's?"
+**Jurisdiction: check which law applies BEFORE touching a repo.** This thesis is the standard Tyler is consolidating toward, never a description of every repo he owns:
 
-**Version 1.1 · 2026-08-26.** Tyler owns this document. Agents propose amendments; Tyler approves them. Product-specific exceptions live in that product's own DESIGN.md with a one-line citation back to the rule they vary. Update in place, never fork.
+- **Payday, Vero iOS:** full law.
+- **Wellspring:** full law, plus its own DESIGN.md exceptions (its own accent, light-only, flat desktop canvas), each recorded with a reason.
+- **New house products:** full law from day one.
+- **Older house repos not yet under the law (askvero-web and similar):** migrate deliberately, only as commissioned work. Never drive-by "fix" them against the blocklist.
+- **Marketing and client sites (szakacsmedia.com, homangrown.com, client work):** copy law and restraint only. Never apply the palette, the elevation budget, or the Apple bar. Restyling a client site into alabaster and one green is vandalism, not compliance.
+
+The acceptance bar for house products: put the result next to his other apps and a stranger should say "same company, obviously." A reviewer should plausibly ask "wait, is this Apple's?" That bar is a taste target for product UI at rest, never a pass/fail gate: shipping the five states beats polishing chrome.
+
+**Version 1.2 · 2026-08-26.** Tyler owns this document. Agents propose amendments; Tyler approves them. Product-specific exceptions live in that product's own DESIGN.md with a one-line citation back to the rule they vary. Update in place, never fork.
 
 **Hard vs. judgment:** the blocklist in Part 7 is hard law, lintable, zero exceptions without Tyler's sign-off. Everything else is judgment exercised under the meta-rule.
 
@@ -94,6 +102,8 @@ The house card shadow, three layers ("cloudy day"):
 
 Dark mode: `black @ 0.3, radius 20, y 10` plus a `0.2` contact layer, and rely on the rim hairline.
 
+These values are a starting point, never scripture: Payday had to strengthen them (0.04 / 0.08 / 0.10 at tighter radii) because the originals vanished on its real surfaces, and it cited the meta-rule when it did. Tune the shadow on the render.
+
 **The elevation budget.** Tyler: "those boxes look awesome in some places, yet in others they look cheap." On mobile: roughly one raised object per screen (the hero); everything else sits flat on the page, separated by whitespace, typography, and hairlines. Raised means shadowed: the budget counts shadow-lifted cards, never flat sections. A screen can hold any number of flat sections headed by tracked kicker labels; it earns roughly one shadowed hero. (Worked example: Payday's dashboard routes exactly one card through the shared card modifier, the hero; the paycheck comparison, shift list, and insights all sit flat under kickers.) Card-in-card and card-in-sheet are always wrong. On desktop: the workspace canvas is flat; shadows exist ONLY on things that float (modals, popovers, drawers, toasts, sticky chrome). No white-card-on-gray-page dashboards on desktop, no exceptions.
 
 On marketing sites, texture substitutes for elevation: subtle noise overlays (SVG turbulence at ~0.03 opacity), halftone dot screens, paper-grain multiply layers. Never decorative borders.
@@ -118,7 +128,7 @@ One font family per product. On Apple platforms: SF Pro, full stop, no serif any
 
 **UI text:** semantic Dynamic Type styles (iOS) or a small px scale (web), with weights bumped roughly one step above platform defaults (body reads semibold, headlines bold). Raw `.font(.system(size:))` for UI text is a bug; type is always a token.
 
-**Floors:** nothing below 13px on desktop/web surfaces (dense chrome like calendar grids may go to 11 to 12px only when a measured audit shows it necessary). Uppercase kicker labels (section eyebrows) are small caption size, semibold, tracked about +0.8, in the accent, and are the sanctioned way to head a flat section.
+**Floors:** nothing below 13px on desktop/web surfaces (dense chrome like calendar grids and chart axis labels may go to 10 to 12px only when a measured audit shows it necessary). Uppercase kicker labels (section eyebrows) are small caption size, semibold, tracked about +0.8, in the accent, and are the sanctioned way to head a flat section.
 
 **Marketing sites are the one place display serifs and monospace live**: Playfair Display or Instrument Serif for editorial headlines (tight tracking, around -0.03em, uppercase or italic emphasis), IBM Plex Mono for terminal aesthetics. Italic serif is the emphasis device on these sites. Never carry these into product UI.
 
@@ -126,7 +136,7 @@ Punctuation habits: middot `·` as the compound separator ("$41/hr · your best 
 
 ## 1.6 Scales
 
-- **Spacing: 4pt grid only.** 4, 8, 12, 16, 20, 24, 32, 40. Page gutters 16 (mobile) to 24-32 (desktop).
+- **Spacing: 4pt grid only.** 4, 8, 12, 16, 20, 24, 32, 40 (a product may add a step through its own DESIGN.md; Payday ships a 30). Page gutters 16 (mobile) to 24-32 (desktop).
 - **Radius scale, only these values:** 6, 10, 14, 18, 24, 9999. Inputs ~14 (or chromeless), cards and drawers 18-24, buttons/chips/badges 9999 (pills). Continuous corner style on Apple platforms.
 - **Hit targets:** 44pt minimum on touch, 36px minimum on desktop. Interactive rows 44-56px tall.
 - Random spacing values are how the system drifts. Reach for the scale first.
@@ -342,4 +352,4 @@ type          SF Pro / system stack; money rounded-heavy + tabular figures; weig
 floors        13px desktop text · 16px mobile inputs · 44pt touch targets
 ```
 
-Interaction grammar: create = Cancel + disabled commit verb · edit = live-save + Done · delete = act now + Undo toast. Copy: every string states a fact or names an action. Motion: information only, ease-out, under 300ms, reduced-motion always. And above all: look at the render.
+The shadow row is a starting point; strengthen it if it vanishes on your real surfaces (Payday did). Interaction grammar: create = Cancel + disabled commit verb · edit = live-save + Done · delete = act now + Undo toast. Copy: every string states a fact or names an action. Motion: information only, ease-out, under 300ms, reduced-motion always. And above all: look at the render.
