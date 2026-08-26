@@ -6,7 +6,7 @@ So I wrote them down.
 
 This is that document. It's not a style guide I aspire to. It's a record of decisions I already made, usually after getting something wrong first. The hex codes are here, but the hex codes are the least of it. What actually transfers is the reasoning.
 
-Two editions live in this repo. This README is the one I wrote for people. [`LLM.md`](LLM.md) is the same law rewritten for machines: paste it into an AI agent at the start of a session and it will build like I do. Steal either one. That's why they're public.
+Three documents live in this repo. This README is the one I wrote for people. [`LLM.md`](LLM.md) is the same law rewritten for machines: paste it into an AI agent at the start of a session and it will build like I do. And [`APPLE_NATIVE.md`](APPLE_NATIVE.md) is the field guide: a catalog of Apple-native SwiftUI components (the drawers, the collapsing bars, the glass, the haptics, the hundred quirks you have to know exist before you can use them), every entry answering EXISTS, USE WHEN, and BUILD, with verified availability floors from iOS 13 to 26, fallbacks for older systems, and the gotchas that only show up in production. For iOS work, paste LLM.md and the catalog together. Steal any of it. That's why it's public.
 
 One honest caveat before anything else. This thesis was distilled primarily from Payday and Vero (they're the proof), from Wellspring's translation of their law to a desktop tool, and from years of my own feedback. It's the standard I'm consolidating toward. It is not a claim that every repo I own already honors it. Some don't. Some never should.
 
