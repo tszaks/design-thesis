@@ -1,0 +1,22 @@
+name: Report an error
+description: A wrong fact, broken link, bad code sample or unclear passage
+labels: ["bug"]
+body:
+  - type: textarea
+    id: where
+    attributes:
+      label: Where is it
+      description: File name and the heading or line. A link to the line on GitHub is best.
+    validations:
+      required: true
+  - type: textarea
+    id: what-wrong
+    attributes:
+      label: What is wrong
+      description: What does it say, and what should it say? Add a source if you have one (Apple documentation, a WWDC session, a test you ran).
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else

@@ -1,4 +1,13 @@
-# My Design Thesis
+<h1 align="center">My Design Thesis</h1>
+
+<p align="center">
+  The design rules behind Payday, Vero and Wellspring, written once for people and once for AI agents.
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/tszaks/design-thesis" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/thesis-v1.2-lightgrey" alt="Thesis version 1.2">
+</p>
 
 I've been building software for a while now. Vero, Payday, Wellspring, a scheduling app, a handful of sites. And somewhere along the way I noticed something: every fight I had with a screen ended the same few ways. The same rules kept winning. Different products, different platforms, same rules.
 
@@ -21,6 +30,14 @@ Which is why, if you're an agent or a person about to touch one of my repos, you
 My acceptance bar for my own products is simple. Put one next to the others and a stranger should say "same company, obviously." A reviewer should plausibly ask "wait, is this Apple's?" That's a taste target, not a checklist item. Shipping a screen's five states beats polishing its chrome every single time.
 
 Version 1.2, August 2026. This document changes when my taste does, in place, never forked. The blocklist near the bottom is hard law with zero exceptions. Everything else is judgment.
+
+## How to use it
+
+This repo is documentation. There is nothing to install.
+
+- **Read it.** This README is the thesis in my own voice.
+- **Give it to an AI agent.** At the start of a session, paste [`LLM.md`](LLM.md) into the agent, or point the agent at the file. For iOS work, paste [`APPLE_NATIVE.md`](APPLE_NATIVE.md) as well. For web sites, add [`APPLE_WEB.md`](APPLE_WEB.md). For web apps, add [`APPLE_WEB_APPS.md`](APPLE_WEB_APPS.md) too.
+- **Check jurisdiction first.** The list above says which repos the law covers and which it does not.
 
 ## The rule that outranks everything
 
@@ -345,3 +362,15 @@ The shadow row is a starting point; strengthen it if it vanishes on your real su
 Create = Cancel + disabled commit verb. Edit = live-save + Done. Delete = act now + Undo toast. Every string states a fact or names an action. Motion is information, ease-out, under 300ms.
 
 And above all: look at the render.
+
+---
+
+## Contributing
+
+This is my personal standard, so the rules change when my taste does. Corrections are welcome: a wrong fact, a broken link, a hex code that does not match what ships, or an unclear sentence. Open an issue with the "Report an error" template. If you think a rule is wrong, use "Suggest a change" and say why. Read [CONTRIBUTING.md](CONTRIBUTING.md) first. Security problems go through [SECURITY.md](SECURITY.md). Everyone taking part follows the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+Docs: [LLM.md](LLM.md) · [APPLE_NATIVE.md](APPLE_NATIVE.md) · [APPLE_WEB.md](APPLE_WEB.md) · [APPLE_WEB_APPS.md](APPLE_WEB_APPS.md) · [changelog](CHANGELOG.md)
+
+## License
+
+[MIT](LICENSE) © 2026 Tyler Szakacs

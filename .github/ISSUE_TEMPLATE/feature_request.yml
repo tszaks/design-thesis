@@ -1,0 +1,26 @@
+name: Suggest a change
+description: Propose an addition, a removal or a different rule
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The design thesis is one person's opinionated standard, kept short on purpose. Suggestions that come with a reason and a source are the easiest to accept.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is missing or wrong
+      description: Describe the gap first. The fix can come after.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you change
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source or evidence
+      description: Links, docs, or something you built and tested.
